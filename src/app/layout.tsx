@@ -117,7 +117,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${inter.variable} antialiased`}>
+    <html lang="zh-CN" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <head>
         <link rel="canonical" href={siteUrl} />
         <script
