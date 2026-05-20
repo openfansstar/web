@@ -70,7 +70,7 @@ export default function CreatorCard({ creator, onConnect, lang }: { creator: Cre
           </div>
         </div>
 
-        <p className="text-sm text-secondary mb-3 line-clamp-2">{creator.bio}</p>
+        <p className="text-sm text-secondary mb-3 line-clamp-2">{isZh ? creator.bio : creator.bioEn}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {creator.tags.map((t) => (
