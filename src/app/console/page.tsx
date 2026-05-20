@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useLang } from '@/i18n/useLanguage'
 
 type Personality = { name: string; desc: string; active: boolean; color: string }
 type Memory = { time: string; content: string; type: 'short' | 'long' }
@@ -10,27 +11,30 @@ export default function ConsolePage() {
   const [activeTab, setActiveTab] = useState<'status' | 'personality' | 'memory' | 'settings' | 'specs'>('status')
   const [specTab, setSpecTab] = useState<SpecTab>('overview')
   const [battery, setBattery] = useState(87)
-  const [personalities, setPersonalities] = useState<Personality[]>([
-    { name: '温柔陪伴', desc: '温暖体贴，如春日微风', active: true, color: '#e94e9f' },
-    { name: '知性对话', desc: '博学多识，深度交流', active: false, color: '#6c5ce7' },
-    { name: '活力伙伴', desc: '元气满满，一起嗨', active: false, color: '#00cec9' },
-    { name: '治愈系', desc: '安静倾听，温柔抚慰', active: false, color: '#00b894' },
-  ])
-  const [memories] = useState<Memory[]>([
-    { time: '今天 09:15', content: '用户今天有一个重要的会议', type: 'short' },
-    { time: '今天 07:30', content: '用户的睡眠质量评分 82分，比昨天好', type: 'short' },
-    { time: '3天前', content: '用户喜欢吃辣，但胃不太好', type: 'long' },
-    { time: '1周前', content: '用户最近在学钢琴', type: 'long' },
-    { time: '2周前', content: '用户的生日是 8月15日', type: 'long' },
-  ])
+  const [activePersonality, setActivePersonality] = useState(0)
+  const { t } = useLang()
+
+  const personalities: Personality[] = [
+    { name: t('console.personality1'), desc: t('console.personality1Desc'), active: false, color: '#e94e9f' },
+    { name: t('console.personality2'), desc: t('console.personality2Desc'), active: false, color: '#6c5ce7' },
+    { name: t('console.personality3'), desc: t('console.personality3Desc'), active: false, color: '#00cec9' },
+    { name: t('console.personality4'), desc: t('console.personality4Desc'), active: false, color: '#00b894' },
+  ].map((p, i) => ({ ...p, active: i === activePersonality }))
+
+  const memories: Memory[] = [
+    { time: t('console.today'), content: t('console.memory1'), type: 'short' as const },
+    { time: t('console.today'), content: t('console.memory2'), type: 'short' as const },
+    { time: t('console.daysAgo'), content: t('console.memory3'), type: 'long' as const },
+    { time: t('console.weekAgo'), content: t('console.memory4'), type: 'long' as const },
+    { time: t('console.twoWeeksAgo'), content: t('console.memory5'), type: 'long' as const },
+  ]
 
   return (
     <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-[#6c5ce7] to-[#00cec9] bg-clip-text text-transparent">
-        Eve 控制台
+        {t('console.title')}
       </h1>
 
-      {/* 设备状态卡片 */}
       <div className="relative p-6 mb-8 rounded-2xl overflow-hidden border border-white/10">
         <div className="absolute inset-0 bg-gradient-to-br from-[#6c5ce7]/20 via-transparent to-[#00cec9]/10" />
         <div className="relative flex items-center gap-6">
@@ -40,9 +44,9 @@ export default function ConsolePage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 mb-1">
               <h2 className="text-2xl font-bold">Eve #001</h2>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">在线</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">{t('console.online')}</span>
             </div>
-            <p className="text-sm text-white/50 mb-3">固件 v2.1.0 · 已连接 2h 34min</p>
+            <p className="text-sm text-white/50 mb-3">{t('console.firmware')} v2.1.0 · {t('console.connected')} 2h 34min</p>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-1.5">
                 <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
@@ -51,15 +55,14 @@ export default function ConsolePage() {
                 <span className="text-white/60">{battery}%</span>
               </div>
               <span className="text-white/30">|</span>
-              <span className="text-white/60">体温 36.8°C</span>
+              <span className="text-white/60">{t('console.temp')} 36.8°C</span>
               <span className="text-white/30">|</span>
-              <span className="text-white/60">呼吸 16/min</span>
+              <span className="text-white/60">{t('console.breath')} 16/min</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tab 导航 */}
       <div className="flex gap-1 mb-8 p-1 rounded-xl bg-white/5 overflow-x-auto scrollbar-none">
         {(['status', 'personality', 'memory', 'settings', 'specs'] as const).map((tab) => (
           <button
@@ -69,19 +72,18 @@ export default function ConsolePage() {
               activeTab === tab ? 'bg-[#6c5ce7]/30 text-white' : 'text-white/40 hover:text-white/70'
             }`}
           >
-            {{ status: '实时状态', personality: '人格模型', memory: '记忆', settings: '设置', specs: '规格' }[tab]}
+            {{ status: t('console.status'), personality: t('console.personality'), memory: t('console.memory'), settings: t('console.settings'), specs: t('console.specs') }[tab]}
           </button>
         ))}
       </div>
 
-      {/* 实时状态 */}
       {activeTab === 'status' && (
         <div className="grid md:grid-cols-2 gap-4">
           {[
-            { label: 'CPU', value: '23%', bar: 23, color: 'from-green-400 to-cyan-400' },
-            { label: '内存', value: '1.2/4GB', bar: 30, color: 'from-purple-400 to-pink-400' },
-            { label: '存储', value: '6.8/32GB', bar: 21, color: 'from-blue-400 to-indigo-400' },
-            { label: '温度', value: '36.8°C', bar: 45, color: 'from-orange-400 to-red-400' },
+            { label: t('console.cpu'), value: '23%', bar: 23, color: 'from-green-400 to-cyan-400' },
+            { label: t('console.memoryLabel'), value: '1.2/4GB', bar: 30, color: 'from-purple-400 to-pink-400' },
+            { label: t('console.storage'), value: '6.8/32GB', bar: 21, color: 'from-blue-400 to-indigo-400' },
+            { label: t('console.temp'), value: '36.8°C', bar: 45, color: 'from-orange-400 to-red-400' },
           ].map((s) => (
             <div key={s.label} className="p-4 rounded-xl bg-white/5 border border-white/10">
               <div className="flex justify-between mb-2">
@@ -96,13 +98,12 @@ export default function ConsolePage() {
         </div>
       )}
 
-      {/* 人格模型 */}
       {activeTab === 'personality' && (
         <div className="grid md:grid-cols-2 gap-4">
-          {personalities.map((p) => (
+          {personalities.map((p, i) => (
             <div
               key={p.name}
-              onClick={() => setPersonalities(personalities.map((x) => ({ ...x, active: x.name === p.name })))}
+              onClick={() => setActivePersonality(i)}
               className={`p-5 rounded-xl border cursor-pointer transition-all ${
                 p.active
                   ? 'border-transparent bg-gradient-to-br from-[#6c5ce7]/30 to-[#00cec9]/10 shadow-lg shadow-[#6c5ce7]/20'
@@ -114,7 +115,7 @@ export default function ConsolePage() {
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: p.color }} />
                   <h3 className="font-semibold">{p.name}</h3>
                 </div>
-                {p.active && <span className="text-xs px-2 py-0.5 rounded-full bg-[#6c5ce7]/30 text-[#b8a9ff]">使用中</span>}
+                {p.active && <span className="text-xs px-2 py-0.5 rounded-full bg-[#6c5ce7]/30 text-[#b8a9ff]">{t('console.active')}</span>}
               </div>
               <p className="text-sm text-white/50">{p.desc}</p>
             </div>
@@ -122,12 +123,11 @@ export default function ConsolePage() {
         </div>
       )}
 
-      {/* 记忆 */}
       {activeTab === 'memory' && (
         <div>
           <div className="flex gap-4 mb-4">
-            <span className="text-sm font-medium text-white/80">近期记忆</span>
-            <span className="text-sm text-white/30">长期记忆</span>
+            <span className="text-sm font-medium text-white/80">{t('console.shortTerm')}</span>
+            <span className="text-sm text-white/30">{t('console.longTerm')}</span>
           </div>
           <div className="space-y-2">
             {memories.map((m, i) => (
@@ -141,7 +141,7 @@ export default function ConsolePage() {
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs px-1.5 py-0.5 rounded bg-white/10 text-white/40">
-                    {m.type === 'short' ? '短期' : '长期'}
+                    {m.type === 'short' ? t('console.shortTerm') : t('console.longTerm')}
                   </span>
                   <span className="text-xs text-white/30">{m.time}</span>
                 </div>
@@ -152,14 +152,13 @@ export default function ConsolePage() {
         </div>
       )}
 
-      {/* 设置 */}
       {activeTab === 'settings' && (
         <div className="space-y-3">
           {[
-            { label: '语音唤醒', desc: '说出"Eve"即可唤醒', on: true },
-            { label: '自动学习', desc: '分析对话习惯优化人格', on: true },
-            { label: '隐私模式', desc: '本地处理所有数据', on: false },
-            { label: '勿扰时段', desc: '23:00 - 07:00 静音', on: true },
+            { label: t('console.wakeUp'), desc: t('console.wakeUpDesc'), on: true },
+            { label: t('console.autoLearn'), desc: t('console.autoLearnDesc'), on: true },
+            { label: t('console.privacy'), desc: t('console.privacyDesc'), on: false },
+            { label: t('console.dnd'), desc: t('console.dndDesc'), on: true },
           ].map((s) => (
             <div key={s.label} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
               <div>
@@ -173,20 +172,19 @@ export default function ConsolePage() {
           ))}
         </div>
       )}
-      {/* 规格介绍 */}
+
       {activeTab === 'specs' && (
         <div>
-          <p className="text-sm text-white/40 mb-6">Eve 的核心理念是「有温度的智能体」—— 一个能感知、响应并成长的具身智能生命体。</p>
+          <p className="text-sm text-white/40 mb-6">{t('console.specsTagline')}</p>
 
-          {/* 子 Tab */}
           <div className="flex gap-1 mb-6 p-0.5 rounded-lg bg-white/5 overflow-x-auto scrollbar-none">
-            {(['overview', 'sensory', 'brain', 'body', 'privacy'] as const).map((t) => (
-              <button key={t} onClick={() => setSpecTab(t)}
+            {(['overview', 'sensory', 'brain', 'body', 'privacy'] as const).map((tName) => (
+              <button key={tName} onClick={() => setSpecTab(tName)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all ${
-                  specTab === t ? 'bg-[#6c5ce7]/30 text-white' : 'text-white/40 hover:text-white/70'
+                  specTab === tName ? 'bg-[#6c5ce7]/30 text-white' : 'text-white/40 hover:text-white/70'
                 }`}
               >
-                {{ overview: '概览', sensory: '感官', brain: '大脑', body: '身体', privacy: '隐私' }[t]}
+                {{ overview: t('console.specs.overview'), sensory: t('console.specs.sensory'), brain: t('console.specs.brain'), body: t('console.specs.body'), privacy: t('console.specs.privacy') }[tName]}
               </button>
             ))}
           </div>
@@ -196,17 +194,17 @@ export default function ConsolePage() {
               <div className="p-5 rounded-2xl bg-gradient-to-br from-[#e94e9f]/10 to-[#6c5ce7]/10 border border-white/10 text-center">
                 <div className="text-3xl mb-2">🤖</div>
                 <div className="text-2xl font-bold">Eve</div>
-                <div className="text-xs text-white/40 mt-1">具身智能硅胶陪伴机器人</div>
+                <div className="text-xs text-white/40 mt-1">{t('console.specs.robot')}</div>
                 <div className="mt-4 grid grid-cols-2 gap-2 text-left">
                   {[
-                    ['处理器', 'AI 芯片 12TOPS'],
-                    ['自由度', '标准 15 / Pro 25'],
-                    ['续航', '标准 8h / Pro 16h'],
-                    ['皮肤', '医用级自修复硅胶'],
-                    ['连接', 'WiFi 6 / BLE 5.3'],
-                    ['重量', '标准 3.2kg / Pro 5.8kg'],
-                    ['高度', '标准 42cm / Pro 68cm'],
-                    ['传感器', '触觉·视觉·听觉·红外'],
+                    [t('console.specs.processor'), t('about.specProcessor') + ' 12TOPS'],
+                    [t('about.specDOF'), t('about.specDOFVal')],
+                    [t('about.specBattery'), t('about.specBatteryVal')],
+                    [t('about.specSkin'), t('about.specSkinVal')],
+                    [t('console.specs.connectivity'), 'WiFi 6 / BLE 5.3'],
+                    [t('about.specWeight'), 'Standard 3.2kg / Pro 5.8kg'],
+                    [t('console.specs.height'), 'Standard 42cm / Pro 68cm'],
+                    [t('console.specs.sensors'), t('about.specSensorsVal')],
                   ].map(([k, v]) => (
                     <div key={k}>
                       <div className="text-xs text-white/30">{k}</div>
@@ -219,13 +217,13 @@ export default function ConsolePage() {
               <div className="md:col-span-2 space-y-4">
                 <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#e94e9f]" /> 核心价值
+                    <span className="w-2 h-2 rounded-full bg-[#e94e9f]" /> {t('specs.coreValues')}
                   </h3>
                   <div className="grid sm:grid-cols-3 gap-3">
                     {[
-                      { icon: '💗', title: '情感共鸣', desc: '感知情绪，自然回应，像朋友一样理解你' },
-                      { icon: '🎭', title: '人格化交互', desc: '多人格模型切换，千人千面的陪伴体验' },
-                      { icon: '✨', title: '无感化服务', desc: '主动关怀，融入日常，无需刻意操作' },
+                      { icon: '💗', title: t('specs.empathy'), desc: t('specs.empathyDesc') },
+                      { icon: '🎭', title: t('specs.personality'), desc: t('specs.personalityDesc') },
+                      { icon: '✨', title: t('specs.seamless'), desc: t('specs.seamlessDesc') },
                     ].map((v) => (
                       <div key={v.title} className="p-3 rounded-xl bg-white/5 text-center">
                         <div className="text-2xl mb-1">{v.icon}</div>
@@ -238,14 +236,14 @@ export default function ConsolePage() {
 
                 <div className="p-5 rounded-2xl bg-gradient-to-br from-[#00cec9]/5 to-[#6c5ce7]/10 border border-white/10">
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#00cec9]" /> 四大核心系统
+                    <span className="w-2 h-2 rounded-full bg-[#00cec9]" /> {t('specs.fourSystems')}
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {[
-                      { title: '具身感知层', desc: '触觉皮肤、听觉系统、视觉系统 — 她的感官', color: '#e94e9f' },
-                      { title: '智能中枢', desc: '多模态大模型、具身执行模型、动态记忆系统', color: '#6c5ce7' },
-                      { title: '仿生执行层', desc: '表情系统、呼吸与体温、动作骨架 — 她的身体', color: '#00cec9' },
-                      { title: '安全与隐私基座', desc: '本地优先处理、物理休眠开关、数据脱敏', color: '#00b894' },
+                      { title: t('specs.system1'), desc: t('specs.system1Desc'), color: '#e94e9f' },
+                      { title: t('specs.system2'), desc: t('specs.system2Desc'), color: '#6c5ce7' },
+                      { title: t('specs.system3'), desc: t('specs.system3Desc'), color: '#00cec9' },
+                      { title: t('specs.system4'), desc: t('specs.system4Desc'), color: '#00b894' },
                     ].map((s) => (
                       <div key={s.title} className="p-3 rounded-xl bg-white/5">
                         <div className="flex items-center gap-2 mb-1">
@@ -265,37 +263,37 @@ export default function ConsolePage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 {
-                  title: '触觉皮肤',
+                  title: t('specs.touch'),
                   icon: '🤚',
                   color: '#e94e9f',
                   layers: [
-                    '外层：亲肤自修复硅胶',
-                    '中层：多点压力/温度传感器',
-                    '内层：分布式柔性气囊模拟肌肉张力',
+                    t('specs.touch1'),
+                    t('specs.touch2'),
+                    t('specs.touch3'),
                   ],
-                  ability: '感知触碰力度与温度，识别抚摸、抓握，在拥抱时给予柔软回应',
+                  ability: t('specs.touchAbility'),
                 },
                 {
-                  title: '听觉系统',
+                  title: t('specs.hearing'),
                   icon: '👂',
                   color: '#6c5ce7',
                   layers: [
-                    '麦克风阵列：声源定位 + 降噪',
-                    '激光测微仪：捕捉声带微振动',
-                    '非语言情感识别算法',
+                    t('specs.hearing1'),
+                    t('specs.hearing2'),
+                    t('specs.hearing3'),
                   ],
-                  ability: '即使你沉默，也能感知呼吸和心跳的细微变化',
+                  ability: t('specs.hearingAbility'),
                 },
                 {
-                  title: '视觉系统',
+                  title: t('specs.vision'),
                   icon: '👁️',
                   color: '#00cec9',
                   layers: [
-                    '眼部摄像头：环境、表情识别',
-                    '手势与行为识别',
-                    '隐私优先：所有视觉数据本地脱敏',
+                    t('specs.vision1'),
+                    t('specs.vision2'),
+                    t('specs.vision3'),
                   ],
-                  ability: '理解你的表情和动作，数据绝不上传云端',
+                  ability: t('specs.visionAbility'),
                 },
               ].map((s) => (
                 <div key={s.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
@@ -310,7 +308,7 @@ export default function ConsolePage() {
                     ))}
                   </ul>
                   <div className="p-3 rounded-xl bg-white/5">
-                    <div className="text-xs text-white/30 mb-0.5">能力</div>
+                    <div className="text-xs text-white/30 mb-0.5">{t('specs.ability')}</div>
                     <p className="text-sm text-white/70">{s.ability}</p>
                   </div>
                 </div>
@@ -322,37 +320,22 @@ export default function ConsolePage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 {
-                  title: '多模态大语言模型',
+                  title: t('specs.brain1'),
                   icon: '🧠',
                   color: '#6c5ce7',
-                  items: [
-                    '认知与推理核心引擎',
-                    '理解言语、表情、历史背景',
-                    '生成连贯、有记忆的对话',
-                    '能探讨哲学，也能记住你的会议',
-                  ],
+                  items: [t('specs.brain1a'), t('specs.brain1b'), t('specs.brain1c'), t('specs.brain1d')],
                 },
                 {
-                  title: '具身执行模型',
+                  title: t('specs.brain2'),
                   icon: '🔄',
                   color: '#e94e9f',
-                  items: [
-                    '将意图指令转化为身体动作',
-                    '微表情、呼吸节奏、体温协同控制',
-                    '形成情绪化的肢体语言',
-                    '表达安慰、喜悦、关心等情感',
-                  ],
+                  items: [t('specs.brain2a'), t('specs.brain2b'), t('specs.brain2c'), t('specs.brain2d')],
                 },
                 {
-                  title: '动态记忆系统',
+                  title: t('specs.brain3'),
                   icon: '📖',
                   color: '#00cec9',
-                  items: [
-                    '短期记忆：维持对话上下文',
-                    '长期记忆：存储关键经历和偏好',
-                    '情感模式学习：越来越懂你',
-                    '像一本与你共同书写的书',
-                  ],
+                  items: [t('specs.brain3a'), t('specs.brain3b'), t('specs.brain3c'), t('specs.brain3d')],
                 },
               ].map((b) => (
                 <div key={b.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
@@ -377,37 +360,22 @@ export default function ConsolePage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 {
-                  title: '表情系统',
+                  title: t('specs.body1'),
                   icon: '😊',
                   color: '#e94e9f',
-                  items: [
-                    '高分辨率柔性屏眼部，模拟微表情',
-                    '颈部与口部微型伺服电机驱动',
-                    '能做出噘嘴、微笑等细腻动作',
-                    '表达丰富的情绪语言',
-                  ],
+                  items: [t('specs.body1a'), t('specs.body1b'), t('specs.body1c'), t('specs.body1d')],
                 },
                 {
-                  title: '呼吸与体温',
+                  title: t('specs.body2'),
                   icon: '🌡️',
                   color: '#00cec9',
-                  items: [
-                    '微型静音气泵模拟均匀呼吸起伏',
-                    '内置加热元件保持 37°C 恒温体感',
-                    '呼吸频率可随场景变化',
-                    '拥抱时体感温暖自然',
-                  ],
+                  items: [t('specs.body2a'), t('specs.body2b'), t('specs.body2c'), t('specs.body2d')],
                 },
                 {
-                  title: '动作骨架',
+                  title: t('specs.body3'),
                   icon: '🦾',
                   color: '#6c5ce7',
-                  items: [
-                    '轻量合金骨架，兼顾强度与重量',
-                    '柔性关节，动作安全柔顺',
-                    '可完成拥抱、转头、手势等动作',
-                    '所有动作经过力控安全校准',
-                  ],
+                  items: [t('specs.body3a'), t('specs.body3b'), t('specs.body3c'), t('specs.body3d')],
                 },
               ].map((b) => (
                 <div key={b.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
@@ -436,17 +404,17 @@ export default function ConsolePage() {
                   <svg className="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   </svg>
-                  本地优先，云端脱敏
+                  {t('specs.privacyTitle')}
                 </h3>
-                <p className="text-sm text-white/60">所有数据处理遵循「本地优先，云端脱敏」原则。生物特征等敏感数据绝不上传云端。</p>
+                <p className="text-sm text-white/60">{t('specs.privacyDesc2')}</p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
-                  { icon: '🔒', title: '端到端加密', desc: '所有通信链路采用端到端加密，第三方无法窃听' },
-                  { icon: '📴', title: '物理休眠开关', desc: '一键切断所有感知模块，从物理层面确保隐私' },
-                  { icon: '🏠', title: '本地推理', desc: 'AI 推理在本地边缘计算模块完成，不依赖云端' },
-                  { icon: '🔄', title: '数据脱敏', desc: '需要上传的数据先脱敏，移除所有个人标识信息' },
+                  { icon: '🔒', title: t('specs.privacy1'), desc: t('specs.privacy1Desc') },
+                  { icon: '📴', title: t('specs.privacy2'), desc: t('specs.privacy2Desc') },
+                  { icon: '🏠', title: t('specs.privacy3'), desc: t('specs.privacy3Desc') },
+                  { icon: '🔄', title: t('specs.privacy4'), desc: t('specs.privacy4Desc') },
                 ].map((p) => (
                   <div key={p.title} className="p-4 rounded-xl bg-white/5 border border-white/10">
                     <div className="text-2xl mb-2">{p.icon}</div>
@@ -459,9 +427,7 @@ export default function ConsolePage() {
               <div className="p-4 rounded-xl bg-yellow-500/5 border border-yellow-500/10">
                 <div className="flex items-start gap-3">
                   <span className="text-xl shrink-0">⚡</span>
-                  <p className="text-sm text-white/60">
-                    Eve 的设计，本质上是对未来人机关系的一次探索。它的真正价值，在于帮助人更好地与自己相处，最终获得拥抱真实生活的勇气与力量。
-                  </p>
+                  <p className="text-sm text-white/60">{t('specs.closingRemark')}</p>
                 </div>
               </div>
             </div>

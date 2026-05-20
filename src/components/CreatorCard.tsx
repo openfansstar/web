@@ -42,7 +42,7 @@ export default function CreatorCard({ creator, onConnect }: { creator: Creator; 
           </div>
           <div className="text-right">
             <div className="text-xs text-white/40">{creator.online ? '在线' : '离线'}</div>
-            <div className="text-lg font-bold text-[#e94e9f]">¥{creator.price}</div>
+            <div className="text-lg font-bold text-[#e94e9f]">${creator.price}</div>
             <div className="text-xs text-white/40">/ 小时</div>
           </div>
         </div>

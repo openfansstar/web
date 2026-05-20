@@ -3,12 +3,24 @@
 import { useState } from 'react'
 import CreatorCard from '@/components/CreatorCard'
 import { creators } from '@/data/creators'
+import { useLang } from '@/i18n/useLanguage'
 
-const categories = ['全部', '在线', '温柔', '知性', '治愈', '活力', '科技', '萌系']
+const categoryKeys = ['全部', '在线', '温柔', '知性', '治愈', '活力', '科技', '萌系']
+const categoryTranslations: Record<string, { en: string; zh: string }> = {
+  '全部': { en: 'All', zh: '全部' },
+  '在线': { en: 'Online', zh: '在线' },
+  '温柔': { en: 'Gentle', zh: '温柔' },
+  '知性': { en: 'Intellectual', zh: '知性' },
+  '治愈': { en: 'Healing', zh: '治愈' },
+  '活力': { en: 'Energetic', zh: '活力' },
+  '科技': { en: 'Tech', zh: '科技' },
+  '萌系': { en: 'Cute', zh: '萌系' },
+}
 
 export default function DiscoverPage() {
   const [activeCat, setActiveCat] = useState('全部')
   const [search, setSearch] = useState('')
+  const { t, lang } = useLang()
 
   const filtered = creators.filter((c) => {
     const matchCat =
@@ -17,16 +29,16 @@ export default function DiscoverPage() {
       c.tags.includes(activeCat)
     const q = search.toLowerCase()
     const matchSearch =
-      !q || c.name.toLowerCase().includes(q) || c.tags.some((t) => t.includes(q))
+      !q || c.name.toLowerCase().includes(q) || c.tags.some((tag) => tag.includes(q))
     return matchCat && matchSearch
   })
 
   return (
     <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] bg-clip-text text-transparent">发现</h1>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] bg-clip-text text-transparent">{t('discover.title')}</h1>
         <div className="text-sm text-white/40">
-          {filtered.length} 位创作者在线
+          {filtered.length} {t('discover.online')}
         </div>
       </div>
 
@@ -35,7 +47,7 @@ export default function DiscoverPage() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="搜索创作者或标签..."
+          placeholder={t('discover.search')}
           className="w-full px-4 py-3 pl-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#e94e9f]/50"
         />
         <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -44,7 +56,7 @@ export default function DiscoverPage() {
       </div>
 
       <div className="flex gap-2 mb-8 overflow-x-auto pb-2 scrollbar-none">
-        {categories.map((cat) => (
+        {categoryKeys.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCat(cat)}
@@ -54,7 +66,7 @@ export default function DiscoverPage() {
                 : 'bg-white/5 text-white/60 hover:bg-white/10'
             }`}
           >
-            {cat}
+            {categoryTranslations[cat]?.[lang] ?? cat}
           </button>
         ))}
       </div>
@@ -64,14 +76,14 @@ export default function DiscoverPage() {
           <CreatorCard
             key={c.id}
             creator={c}
-            onConnect={() => alert(`P2P 连接请求已发送给 ${c.name}`)}
+            onConnect={() => alert(`${t('discover.connectSent')} ${c.name}`)}
           />
         ))}
       </div>
 
       {filtered.length === 0 && (
         <div className="text-center py-20 text-white/30">
-          没有找到匹配的创作者
+          {t('discover.noResults')}
         </div>
       )}
     </main>
