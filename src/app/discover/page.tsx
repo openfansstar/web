@@ -76,6 +76,7 @@ export default function DiscoverPage() {
           <CreatorCard
             key={c.id}
             creator={c}
+            lang={lang}
             onConnect={() => alert(`${t('discover.connectSent')} ${c.name}`)}
           />
         ))}

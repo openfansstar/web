@@ -38,7 +38,7 @@ export default function LoginPage() {
     <main className="pt-24 px-4 min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <img src="/logo.png" alt="Openfans" className="w-20 h-20 rounded-full mx-auto mb-4" />
+          <img src="/logo.png" alt="Openfans logo" className="w-20 h-20 rounded-full mx-auto mb-4" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] bg-clip-text text-transparent">
             {mode === 'login' ? t('login.title') : t('login.titleRegister')}
           </h1>

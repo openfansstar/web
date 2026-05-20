@@ -1,11 +1,23 @@
 'use client'
 
 import { useLang } from '@/i18n/useLanguage'
+import JsonLd from '@/components/JsonLd'
+
+const faqData = {
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "What is Openfans?", acceptedAnswer: { "@type": "Answer", text: "Openfans is a Web3-based decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy for creators and fans." } },
+    { "@type": "Question", name: "What is Eve?", acceptedAnswer: { "@type": "Answer", text: "Eve is an embodied AI silicone companion robot with multi-personality models, natural conversation, emotion recognition, health monitoring, and smart home control." } },
+    { "@type": "Question", name: "How does the token economy work?", acceptedAnswer: { "@type": "Answer", text: "Openfans uses a blockchain-based token system for fan tips, creator monetization, and personality trading — all on-chain and transparent." } },
+    { "@type": "Question", name: "Is my data private?", acceptedAnswer: { "@type": "Answer", text: "Yes. End-to-end encrypted communication, local-first data storage. User data sovereignty belongs to users, not the platform." } },
+  ],
+}
 
 export default function ReadmePage() {
   const { t } = useLang()
   return (
     <main className="pt-24 px-4 max-w-4xl mx-auto min-h-screen pb-24">
+      <JsonLd data={faqData} />
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-[#00cec9] to-[#6c5ce7] bg-clip-text text-transparent">
         {t('about.title')}
       </h1>

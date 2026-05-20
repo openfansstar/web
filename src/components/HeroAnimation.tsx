@@ -33,7 +33,7 @@ export default function HeroAnimation() {
         >
           <img
             src={`/eve${i + 1}.png`}
-            alt={`Eve ${i + 1}`}
+            alt={`AI companion robot Eve — design concept ${i + 1}`}
             className="h-full w-full object-cover"
           />
         </div>

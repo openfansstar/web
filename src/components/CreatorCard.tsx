@@ -29,7 +29,19 @@ const tagColors: Record<string, string> = {
   撒娇: 'bg-fuchsia-300/20 text-fuchsia-100',
 }
 
-export default function CreatorCard({ creator, onConnect }: { creator: Creator; onConnect: () => void }) {
+const tagTranslations: Record<string, string> = {
+  '温柔': 'Gentle', '知性': 'Intellectual', '音乐': 'Music',
+  '活力': 'Energetic', '运动': 'Sports', '游戏': 'Gaming',
+  '治愈': 'Healing', '阅读': 'Reading', '咖啡': 'Coffee',
+  科技: 'Tech', AI: 'AI', 哲学: 'Philosophy',
+  艺术: 'Art', 摄影: 'Photography', 旅行: 'Travel',
+  萌系: 'Cute', 可爱: 'Lovely', 舞蹈: 'Dance',
+  御姐: 'Mature', 职场: 'Office', 红酒: 'Wine',
+  甜系: 'Sweet', 萝莉: 'Loli', 撒娇: 'Playful',
+}
+
+export default function CreatorCard({ creator, onConnect, lang }: { creator: Creator; onConnect: () => void; lang: string }) {
+  const isZh = lang === 'zh'
   return (
     <div className="group relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-[#e94e9f]/40 hover:bg-white/[0.07] transition-all">
       <div className="p-6">
@@ -41,9 +53,9 @@ export default function CreatorCard({ creator, onConnect }: { creator: Creator; 
             )}
           </div>
           <div className="text-right">
-            <div className="text-xs text-white/40">{creator.online ? '在线' : '离线'}</div>
+            <div className="text-xs text-white/40">{creator.online ? (isZh ? '在线' : 'Online') : (isZh ? '离线' : 'Offline')}</div>
             <div className="text-lg font-bold text-[#e94e9f]">${creator.price}</div>
-            <div className="text-xs text-white/40">/ 小时</div>
+            <div className="text-xs text-white/40">{isZh ? '/ 小时' : '/ hr'}</div>
           </div>
         </div>
 
@@ -61,18 +73,18 @@ export default function CreatorCard({ creator, onConnect }: { creator: Creator; 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {creator.tags.map((t) => (
             <span key={t} className={`text-xs px-2 py-0.5 rounded-full ${tagColors[t] || 'bg-white/10 text-white/60'}`}>
-              {t}
+              {isZh ? t : (tagTranslations[t] || t)}
             </span>
           ))}
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/30">{creator.followers} 粉丝</span>
+          <span className="text-xs text-white/30">{creator.followers} {isZh ? '粉丝' : 'fans'}</span>
           <button
             onClick={onConnect}
             className="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity"
           >
-            P2P 连接
+            {isZh ? 'P2P 连接' : 'P2P Connect'}
           </button>
         </div>
       </div>

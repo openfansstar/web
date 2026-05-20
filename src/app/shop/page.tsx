@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useLang } from '@/i18n/useLanguage'
+import JsonLd from '@/components/JsonLd'
 
 type CartItem = { name: string; price: number; qty: number }
 
@@ -165,7 +166,20 @@ export default function ShopPage() {
   const tSystemDesc = (s: typeof products[0]['systems'][0]) => isZh ? s.descCn : s.desc
 
   return (
-    <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
+    <>
+      {activeProduct && <JsonLd data={{
+        '@type': 'Product',
+        name: tName(activeProduct),
+        description: tTagline(activeProduct),
+        brand: { '@type': 'Brand', name: 'Openfans' },
+        offers: {
+          '@type': 'Offer',
+          price: activeProduct.price,
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+        },
+      }} />}
+      <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-[#00cec9] to-[#e94e9f] bg-clip-text text-transparent">{t('shop.title')}</h1>
 
       <div className="flex gap-1 mb-8 p-1 rounded-xl bg-white/5">
@@ -420,6 +434,5 @@ export default function ShopPage() {
           </div>
         </div>
       )}
-    </main>
-  )
+    </main></>);
 }
