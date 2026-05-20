@@ -182,11 +182,11 @@ export default function ShopPage() {
       <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
       <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-[#00cec9] to-[#e94e9f] bg-clip-text text-transparent">{t('shop.title')}</h1>
 
-      <div className="flex gap-1 mb-8 p-1 rounded-xl bg-white/5">
+      <div className="flex gap-1 mb-8 p-1 rounded-xl bg-card">
         {(['hardware', 'subscription', 'personality'] as const).map((tName) => (
           <button key={tName} onClick={() => setTab(tName)}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
-              tab === tName ? 'bg-[#00cec9]/30 text-white' : 'text-white/40 hover:text-white/70'
+               tab === tName ? 'bg-[#00cec9]/30 text-white' : 'text-muted hover:text-nav-link'
             }`}
           >
             {{ hardware: t('shop.hardware'), subscription: t('shop.subscription'), personality: t('shop.personality') }[tName]}
@@ -202,22 +202,22 @@ export default function ShopPage() {
                 className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   model === p.id
                     ? 'bg-gradient-to-r from-[#6c5ce7] to-[#00cec9] text-white'
-                    : 'bg-white/5 text-white/50 hover:bg-white/10 border border-white/10'
+                    : 'bg-card text-secondary hover:bg-card-hover border-theme'
                 }`}>
                 {tName(p)}
               </button>
             ))}
           </div>
 
-          <div className="p-6 md:p-8 mb-6 rounded-2xl bg-gradient-to-br from-[#6c5ce7]/20 via-transparent to-[#00cec9]/10 border border-white/10">
+          <div className="p-6 md:p-8 mb-6 rounded-2xl bg-gradient-to-br from-[#6c5ce7]/20 via-transparent to-[#00cec9]/10 border-theme">
             <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-[#e94e9f]/30 to-[#6c5ce7]/30 flex items-center justify-center text-6xl shrink-0">E</div>
               <div className="flex-1 text-center md:text-left">
                 <div className="flex items-center gap-3 justify-center md:justify-start mb-1">
                   <h2 className="text-3xl font-bold">{tName(activeProduct)} — {tBadge(activeProduct)}</h2>
                 </div>
-                <p className="text-lg text-white/50 mb-1">{tTagline(activeProduct)}</p>
-                <p className="text-sm text-white/30 mb-4">{tSpecs(activeProduct)}</p>
+                <p className="text-lg text-secondary mb-1">{tTagline(activeProduct)}</p>
+                <p className="text-sm text-muted mb-4">{tSpecs(activeProduct)}</p>
                 <div className="flex items-center gap-4 justify-center md:justify-start">
                   <span className="text-3xl font-bold text-[#00cec9]">${activeProduct.price}</span>
                   <button onClick={() => addToCart(tName(activeProduct), activeProduct.price)}
@@ -241,8 +241,8 @@ export default function ShopPage() {
                   { label: t('console.specs.connectivity'), val: activeProduct.connection },
                   { label: t('console.specs.sensors'), val: tSensors(activeProduct) },
                 ].map((s) => (
-                  <div key={s.label} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                    <div className="text-xs text-white/30 mb-0.5">{s.label}</div>
+                  <div key={s.label} className="p-3 rounded-xl bg-card border-theme text-center">
+                    <div className="text-xs text-muted mb-0.5">{s.label}</div>
                     <div className="text-sm font-medium">{s.val}</div>
                   </div>
                 ))}
@@ -255,11 +255,11 @@ export default function ShopPage() {
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {tFeatures(activeProduct).map((f: string) => (
-                    <div key={f} className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div key={f} className="flex items-center gap-3 p-3 rounded-xl bg-card border-theme">
                       <svg className="w-5 h-5 text-[#00cec9] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-sm text-white/70">{f}</span>
+                      <span className="text-sm text-nav-link">{f}</span>
                     </div>
                   ))}
                 </div>
@@ -272,12 +272,12 @@ export default function ShopPage() {
                 </h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {activeProduct.systems.map((s) => (
-                    <div key={s.title} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div key={s.title} className="p-4 rounded-xl bg-card border-theme">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
                         <h4 className="font-medium text-sm">{tSystemTitle(s)}</h4>
                       </div>
-                      <p className="text-xs text-white/50 leading-relaxed">{tSystemDesc(s)}</p>
+                      <p className="text-xs text-secondary leading-relaxed">{tSystemDesc(s)}</p>
                     </div>
                   ))}
                 </div>
@@ -290,10 +290,10 @@ export default function ShopPage() {
                 </h3>
                 <div className="grid sm:grid-cols-3 gap-3">
                   {activeProduct.scenarios.map((s) => (
-                    <div key={s.title} className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                    <div key={s.title} className="p-4 rounded-xl bg-card border-theme text-center">
                       <div className="text-2xl mb-2">{s.icon}</div>
                       <h4 className="text-sm font-medium mb-1">{tScenarioTitle(s)}</h4>
-                      <p className="text-xs text-white/50">{tScenarioDesc(s)}</p>
+                      <p className="text-xs text-secondary">{tScenarioDesc(s)}</p>
                     </div>
                   ))}
                 </div>
@@ -306,17 +306,17 @@ export default function ShopPage() {
                   </svg>
                   {isZh ? '伦理设计' : 'Ethical Design'}
                 </h3>
-                <div className="grid sm:grid-cols-3 gap-3 text-sm text-white/50">
-                  <div className="p-3 rounded-xl bg-white/5">
-                    <span className="font-medium text-white/70">{isZh ? '情感依赖' : 'Emotional Attachment'}</span>
+                <div className="grid sm:grid-cols-3 gap-3 text-sm text-secondary">
+                  <div className="p-3 rounded-xl bg-card">
+                    <span className="font-medium text-nav-link">{isZh ? '情感依赖' : 'Emotional Attachment'}</span>
                     <p className="text-xs mt-0.5">{isZh ? '系统透明提示「我是AI」，引导用户回归现实连接' : 'System transparently states "I am AI", guides users toward real-world connections'}</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5">
-                    <span className="font-medium text-white/70">{isZh ? '恐怖谷效应' : 'Uncanny Valley'}</span>
+                  <div className="p-3 rounded-xl bg-card">
+                    <span className="font-medium text-nav-link">{isZh ? '恐怖谷效应' : 'Uncanny Valley'}</span>
                     <p className="text-xs mt-0.5">{isZh ? '有生命感但不完全拟人，通过微妙非人节奏跨越陷阱' : 'Lifelike but not fully human, uses subtle non-human rhythms to cross the valley'}</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-white/5">
-                    <span className="font-medium text-white/70">{isZh ? '社会接受度' : 'Social Acceptance'}</span>
+                  <div className="p-3 rounded-xl bg-card">
+                    <span className="font-medium text-nav-link">{isZh ? '社会接受度' : 'Social Acceptance'}</span>
                     <p className="text-xs mt-0.5">{isZh ? '以「健康陪伴」为切入点，避免低俗化' : 'Focuses on "healthy companionship", avoids vulgarization'}</p>
                   </div>
                 </div>
@@ -327,9 +327,9 @@ export default function ShopPage() {
           {activeProduct.id === 'accessory' && (
             <div className="grid sm:grid-cols-2 gap-4">
               {tFeatures(activeProduct).map((f: string) => (
-                <div key={f} className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                <div key={f} className="p-4 rounded-xl bg-card border-theme text-center">
                   <div className="text-3xl mb-2">📦</div>
-                  <p className="text-sm text-white/70">{f}</p>
+                  <p className="text-sm text-nav-link">{f}</p>
                 </div>
               ))}
             </div>
@@ -345,8 +345,10 @@ export default function ShopPage() {
             { name: isZh ? '至尊' : 'Ultimate', price: 399, popular: false, features: isZh ? ['全部人格', '无限对话', '专业咨询', '优先更新', 'VIP 支持'] : ['All personalities', 'Unlimited conversation', 'Professional consultation', 'Priority updates', 'VIP support'] },
           ].map((p) => (
             <div key={p.name} className={`relative p-6 rounded-2xl border transition-all ${
-              p.popular ? 'border-[#00cec9] bg-[#00cec9]/5' : 'bg-white/5 border-white/10 hover:border-white/30'
-            }`}>
+              p.popular ? 'border-[#00cec9] bg-[#00cec9]/5' : 'bg-card border-theme'
+            }`} style={{ borderColor: !p.popular ? 'var(--border-color)' : undefined }}
+            onMouseEnter={(e) => { if (!p.popular) e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)' }}
+            onMouseLeave={(e) => { if (!p.popular) e.currentTarget.style.borderColor = 'var(--border-color)' }}>
               {p.popular && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-0.5 rounded-full bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] text-white">
                   {isZh ? '推荐' : 'Popular'}
@@ -359,7 +361,7 @@ export default function ShopPage() {
               </div>
               <ul className="space-y-2 mb-6">
                 {p.features.map((f: string) => (
-                  <li key={f} className="text-sm text-white/60 flex items-center gap-2">
+                  <li key={f} className="text-sm text-nav-link flex items-center gap-2">
                     <svg className="w-4 h-4 text-[#00cec9] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
@@ -371,7 +373,7 @@ export default function ShopPage() {
                 className={`w-full py-2 rounded-full text-sm font-medium transition-all ${
                   p.popular
                     ? 'bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] text-white'
-                    : 'bg-white/10 text-white/70 hover:bg-white/20'
+                    : 'bg-card-hover text-nav-link hover:bg-white/20'
                 }`}>
                 {t('shop.subscribe')}
               </button>
@@ -392,12 +394,14 @@ export default function ShopPage() {
             { name: isZh ? '运动搭档' : 'Sports Buddy', author: 'Aria', price: 45, downloads: '1.5k' },
             { name: isZh ? '哲学导师' : 'Philosophy Mentor', author: 'Eva', price: 89, downloads: '0.9k' },
           ].map((p) => (
-            <div key={p.name} className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#e94e9f]/40 transition-all">
+            <div key={p.name} className="p-4 rounded-2xl bg-card border-theme transition-all" style={{ borderColor: 'var(--border-color)' }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'rgba(233,78,159,0.4)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}>
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#e94e9f] to-[#6c5ce7] flex items-center justify-center text-lg mb-3">{p.name[0]}</div>
               <h3 className="font-semibold text-sm mb-0.5">{p.name}</h3>
-              <p className="text-xs text-white/40 mb-2">by {p.author}</p>
+              <p className="text-xs text-muted mb-2">by {p.author}</p>
               <div className="flex items-center justify-between">
-                <span className="text-xs text-white/30">{p.downloads} {t('shop.downloads')}</span>
+                <span className="text-xs text-muted">{p.downloads} {t('shop.downloads')}</span>
                 <button onClick={() => addToCart(p.name, p.price)}
                   className="text-xs px-3 py-1 rounded-full bg-[#e94e9f]/20 text-[#e94e9f] hover:bg-[#e94e9f]/30 transition-colors">
                   ${p.price}
@@ -410,20 +414,20 @@ export default function ShopPage() {
 
       {cart.length > 0 && (
         <div className="fixed bottom-6 right-6 z-40">
-          <div className="bg-[#1a1a2e] border border-white/10 rounded-2xl p-4 shadow-2xl shadow-black/50 min-w-64">
+          <div className="bg-surface border-theme rounded-2xl p-4 shadow-2xl min-w-64" style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-sm">{t('shop.cart')} ({cart.length})</h4>
-              <button onClick={() => setCart([])} className="text-xs text-white/30 hover:text-white/60">{t('shop.clear')}</button>
+              <button onClick={() => setCart([])} className="text-xs text-muted hover:text-nav-link">{t('shop.clear')}</button>
             </div>
             <div className="space-y-2 mb-3 max-h-40 overflow-y-auto">
               {cart.map((item) => (
                 <div key={item.name} className="flex items-center justify-between text-sm">
-                  <span className="text-white/70">{item.name} x{item.qty}</span>
+                  <span className="text-nav-link">{item.name} x{item.qty}</span>
                   <span className="text-[#00cec9]">${item.price * item.qty}</span>
                 </div>
               ))}
             </div>
-            <div className="flex items-center justify-between pt-3 border-t border-white/10">
+            <div className="flex items-center justify-between pt-3 border-t border-theme">
               <span className="font-semibold">{t('shop.total')}</span>
               <span className="font-bold text-[#e94e9f]">${total}</span>
             </div>

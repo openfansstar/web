@@ -35,7 +35,7 @@ export default function ConsolePage() {
         {t('console.title')}
       </h1>
 
-      <div className="relative p-6 mb-8 rounded-2xl overflow-hidden border border-white/10">
+      <div className="relative p-6 mb-8 rounded-2xl overflow-hidden border-theme">
         <div className="absolute inset-0 bg-gradient-to-br from-[#6c5ce7]/20 via-transparent to-[#00cec9]/10" />
         <div className="relative flex items-center gap-6">
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#e94e9f] to-[#6c5ce7] flex items-center justify-center text-4xl shrink-0 animate-float">
@@ -46,30 +46,30 @@ export default function ConsolePage() {
               <h2 className="text-2xl font-bold">Eve #001</h2>
               <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-300">{t('console.online')}</span>
             </div>
-            <p className="text-sm text-white/50 mb-3">{t('console.firmware')} v2.1.0 · {t('console.connected')} 2h 34min</p>
+            <p className="text-sm text-secondary mb-3">{t('console.firmware')} v2.1.0 · {t('console.connected')} 2h 34min</p>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-1.5">
-                <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                <div className="w-16 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-card-hover)' }}>
                   <div className="h-full rounded-full bg-gradient-to-r from-green-400 to-yellow-400" style={{ width: `${battery}%` }} />
                 </div>
-                <span className="text-white/60">{battery}%</span>
+                <span className="text-nav-link">{battery}%</span>
               </div>
-              <span className="text-white/30">|</span>
-              <span className="text-white/60">{t('console.temp')} 36.8°C</span>
-              <span className="text-white/30">|</span>
-              <span className="text-white/60">{t('console.breath')} 16/min</span>
+              <span className="text-muted">|</span>
+              <span className="text-nav-link">{t('console.temp')} 36.8°C</span>
+              <span className="text-muted">|</span>
+              <span className="text-nav-link">{t('console.breath')} 16/min</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex gap-1 mb-8 p-1 rounded-xl bg-white/5 overflow-x-auto scrollbar-none">
+      <div className="flex gap-1 mb-8 p-1 rounded-xl bg-card overflow-x-auto scrollbar-none">
         {(['status', 'personality', 'memory', 'settings', 'specs'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
-              activeTab === tab ? 'bg-[#6c5ce7]/30 text-white' : 'text-white/40 hover:text-white/70'
+               activeTab === tab ? 'bg-[#6c5ce7]/30 text-white' : 'text-muted hover:text-nav-link'
             }`}
           >
             {{ status: t('console.status'), personality: t('console.personality'), memory: t('console.memory'), settings: t('console.settings'), specs: t('console.specs') }[tab]}
@@ -85,12 +85,12 @@ export default function ConsolePage() {
             { label: t('console.storage'), value: '6.8/32GB', bar: 21, color: 'from-blue-400 to-indigo-400' },
             { label: t('console.temp'), value: '36.8°C', bar: 45, color: 'from-orange-400 to-red-400' },
           ].map((s) => (
-            <div key={s.label} className="p-4 rounded-xl bg-white/5 border border-white/10">
+            <div key={s.label} className="p-4 rounded-xl bg-card border-theme">
               <div className="flex justify-between mb-2">
-                <span className="text-sm text-white/60">{s.label}</span>
+                <span className="text-sm text-nav-link">{s.label}</span>
                 <span className="text-sm font-medium">{s.value}</span>
               </div>
-              <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--bg-card-hover)' }}>
                 <div className={`h-full rounded-full bg-gradient-to-r ${s.color}`} style={{ width: `${s.bar}%` }} />
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function ConsolePage() {
               className={`p-5 rounded-xl border cursor-pointer transition-all ${
                 p.active
                   ? 'border-transparent bg-gradient-to-br from-[#6c5ce7]/30 to-[#00cec9]/10 shadow-lg shadow-[#6c5ce7]/20'
-                  : 'bg-white/5 border-white/10 hover:bg-white/10'
+                   : 'bg-card border-theme hover:bg-card-hover'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
@@ -117,7 +117,7 @@ export default function ConsolePage() {
                 </div>
                 {p.active && <span className="text-xs px-2 py-0.5 rounded-full bg-[#6c5ce7]/30 text-[#b8a9ff]">{t('console.active')}</span>}
               </div>
-              <p className="text-sm text-white/50">{p.desc}</p>
+              <p className="text-sm text-secondary">{p.desc}</p>
             </div>
           ))}
         </div>
@@ -126,26 +126,26 @@ export default function ConsolePage() {
       {activeTab === 'memory' && (
         <div>
           <div className="flex gap-4 mb-4">
-            <span className="text-sm font-medium text-white/80">{t('console.shortTerm')}</span>
-            <span className="text-sm text-white/30">{t('console.longTerm')}</span>
+            <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{t('console.shortTerm')}</span>
+            <span className="text-sm text-muted">{t('console.longTerm')}</span>
           </div>
           <div className="space-y-2">
             {memories.map((m, i) => (
               <div
                 key={i}
                 className={`p-4 rounded-xl border ${
-                  m.type === 'short'
-                    ? 'bg-white/5 border-white/10'
+                   m.type === 'short'
+                    ? 'bg-card border-theme'
                     : 'bg-purple-500/5 border-purple-500/20'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs px-1.5 py-0.5 rounded bg-white/10 text-white/40">
+                  <span className="text-xs px-1.5 py-0.5 rounded bg-card-hover text-muted">
                     {m.type === 'short' ? t('console.shortTerm') : t('console.longTerm')}
                   </span>
-                  <span className="text-xs text-white/30">{m.time}</span>
+                  <span className="text-xs text-muted">{m.time}</span>
                 </div>
-                <p className="text-sm text-white/70">{m.content}</p>
+                <p className="text-sm text-nav-link">{m.content}</p>
               </div>
             ))}
           </div>
@@ -160,10 +160,10 @@ export default function ConsolePage() {
             { label: t('console.privacy'), desc: t('console.privacyDesc'), on: false },
             { label: t('console.dnd'), desc: t('console.dndDesc'), on: true },
           ].map((s) => (
-            <div key={s.label} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
+            <div key={s.label} className="flex items-center justify-between p-4 rounded-xl bg-card border-theme">
               <div>
                 <div className="font-medium text-sm">{s.label}</div>
-                <div className="text-xs text-white/40">{s.desc}</div>
+                <div className="text-xs text-muted">{s.desc}</div>
               </div>
               <div className={`w-10 h-5 rounded-full transition-colors relative ${s.on ? 'bg-[#6c5ce7]' : 'bg-white/20'}`}>
                 <div className={`w-3.5 h-3.5 rounded-full bg-white absolute top-0.5 transition-all ${s.on ? 'right-0.5' : 'left-0.5'}`} />
@@ -175,13 +175,13 @@ export default function ConsolePage() {
 
       {activeTab === 'specs' && (
         <div>
-          <p className="text-sm text-white/40 mb-6">{t('console.specsTagline')}</p>
+          <p className="text-sm text-muted mb-6">{t('console.specsTagline')}</p>
 
-          <div className="flex gap-1 mb-6 p-0.5 rounded-lg bg-white/5 overflow-x-auto scrollbar-none">
+          <div className="flex gap-1 mb-6 p-0.5 rounded-lg bg-card overflow-x-auto scrollbar-none">
             {(['overview', 'sensory', 'brain', 'body', 'privacy'] as const).map((tName) => (
               <button key={tName} onClick={() => setSpecTab(tName)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all ${
-                  specTab === tName ? 'bg-[#6c5ce7]/30 text-white' : 'text-white/40 hover:text-white/70'
+                   specTab === tName ? 'bg-[#6c5ce7]/30 text-white' : 'text-muted hover:text-nav-link'
                 }`}
               >
                 {{ overview: t('console.specs.overview'), sensory: t('console.specs.sensory'), brain: t('console.specs.brain'), body: t('console.specs.body'), privacy: t('console.specs.privacy') }[tName]}
@@ -191,10 +191,10 @@ export default function ConsolePage() {
 
           {specTab === 'overview' && (
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-[#e94e9f]/10 to-[#6c5ce7]/10 border border-white/10 text-center">
+              <div className="p-5 rounded-2xl bg-gradient-to-br from-[#e94e9f]/10 to-[#6c5ce7]/10 border-theme text-center">
                 <div className="text-3xl mb-2">🤖</div>
                 <div className="text-2xl font-bold">Eve</div>
-                <div className="text-xs text-white/40 mt-1">{t('console.specs.robot')}</div>
+                <div className="text-xs text-muted mt-1">{t('console.specs.robot')}</div>
                 <div className="mt-4 grid grid-cols-2 gap-2 text-left">
                   {[
                     [t('console.specs.processor'), t('about.specProcessor') + ' 12TOPS'],
@@ -207,7 +207,7 @@ export default function ConsolePage() {
                     [t('console.specs.sensors'), t('about.specSensorsVal')],
                   ].map(([k, v]) => (
                     <div key={k}>
-                      <div className="text-xs text-white/30">{k}</div>
+                      <div className="text-xs text-muted">{k}</div>
                       <div className="text-sm font-medium">{v}</div>
                     </div>
                   ))}
@@ -215,7 +215,7 @@ export default function ConsolePage() {
               </div>
 
               <div className="md:col-span-2 space-y-4">
-                <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div className="p-5 rounded-2xl bg-card border-theme">
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#e94e9f]" /> {t('specs.coreValues')}
                   </h3>
@@ -225,16 +225,16 @@ export default function ConsolePage() {
                       { icon: '🎭', title: t('specs.personality'), desc: t('specs.personalityDesc') },
                       { icon: '✨', title: t('specs.seamless'), desc: t('specs.seamlessDesc') },
                     ].map((v) => (
-                      <div key={v.title} className="p-3 rounded-xl bg-white/5 text-center">
+                      <div key={v.title} className="p-3 rounded-xl bg-card text-center">
                         <div className="text-2xl mb-1">{v.icon}</div>
                         <div className="text-sm font-medium mb-0.5">{v.title}</div>
-                        <div className="text-xs text-white/40">{v.desc}</div>
+                        <div className="text-xs text-muted">{v.desc}</div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-gradient-to-br from-[#00cec9]/5 to-[#6c5ce7]/10 border border-white/10">
+                <div className="p-5 rounded-2xl bg-gradient-to-br from-[#00cec9]/5 to-[#6c5ce7]/10 border-theme">
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#00cec9]" /> {t('specs.fourSystems')}
                   </h3>
@@ -245,12 +245,12 @@ export default function ConsolePage() {
                       { title: t('specs.system3'), desc: t('specs.system3Desc'), color: '#00cec9' },
                       { title: t('specs.system4'), desc: t('specs.system4Desc'), color: '#00b894' },
                     ].map((s) => (
-                      <div key={s.title} className="p-3 rounded-xl bg-white/5">
+                      <div key={s.title} className="p-3 rounded-xl bg-card">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: s.color }} />
                           <span className="text-sm font-medium">{s.title}</span>
                         </div>
-                        <p className="text-xs text-white/50">{s.desc}</p>
+                        <p className="text-xs text-secondary">{s.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -296,20 +296,20 @@ export default function ConsolePage() {
                   ability: t('specs.visionAbility'),
                 },
               ].map((s) => (
-                <div key={s.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div key={s.title} className="p-5 rounded-2xl bg-card border-theme">
                   <div className="text-3xl mb-3">{s.icon}</div>
                   <h3 className="font-semibold mb-2" style={{ color: s.color }}>{s.title}</h3>
                   <ul className="space-y-1 mb-3">
                     {s.layers.map((l) => (
-                      <li key={l} className="text-sm text-white/60 flex items-start gap-2">
+                      <li key={l} className="text-sm text-nav-link flex items-start gap-2">
                         <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: s.color }} />
                         {l}
                       </li>
                     ))}
                   </ul>
-                  <div className="p-3 rounded-xl bg-white/5">
-                    <div className="text-xs text-white/30 mb-0.5">{t('specs.ability')}</div>
-                    <p className="text-sm text-white/70">{s.ability}</p>
+                  <div className="p-3 rounded-xl bg-card">
+                    <div className="text-xs text-muted mb-0.5">{t('specs.ability')}</div>
+                    <p className="text-sm text-nav-link">{s.ability}</p>
                   </div>
                 </div>
               ))}
@@ -338,7 +338,7 @@ export default function ConsolePage() {
                   items: [t('specs.brain3a'), t('specs.brain3b'), t('specs.brain3c'), t('specs.brain3d')],
                 },
               ].map((b) => (
-                <div key={b.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div key={b.title} className="p-5 rounded-2xl bg-card border-theme">
                   <div className="text-3xl mb-3">{b.icon}</div>
                   <h3 className="font-semibold mb-3" style={{ color: b.color }}>{b.title}</h3>
                   <ul className="space-y-2">
@@ -378,7 +378,7 @@ export default function ConsolePage() {
                   items: [t('specs.body3a'), t('specs.body3b'), t('specs.body3c'), t('specs.body3d')],
                 },
               ].map((b) => (
-                <div key={b.title} className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                <div key={b.title} className="p-5 rounded-2xl bg-card border-theme">
                   <div className="text-3xl mb-3">{b.icon}</div>
                   <h3 className="font-semibold mb-3" style={{ color: b.color }}>{b.title}</h3>
                   <ul className="space-y-2">
@@ -406,7 +406,7 @@ export default function ConsolePage() {
                   </svg>
                   {t('specs.privacyTitle')}
                 </h3>
-                <p className="text-sm text-white/60">{t('specs.privacyDesc2')}</p>
+                <p className="text-sm text-nav-link">{t('specs.privacyDesc2')}</p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
@@ -416,10 +416,10 @@ export default function ConsolePage() {
                   { icon: '🏠', title: t('specs.privacy3'), desc: t('specs.privacy3Desc') },
                   { icon: '🔄', title: t('specs.privacy4'), desc: t('specs.privacy4Desc') },
                 ].map((p) => (
-                  <div key={p.title} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div key={p.title} className="p-4 rounded-xl bg-card border-theme">
                     <div className="text-2xl mb-2">{p.icon}</div>
                     <h4 className="font-medium text-sm mb-0.5">{p.title}</h4>
-                    <p className="text-xs text-white/50">{p.desc}</p>
+                    <p className="text-xs text-secondary">{p.desc}</p>
                   </div>
                 ))}
               </div>
@@ -427,7 +427,7 @@ export default function ConsolePage() {
               <div className="p-4 rounded-xl bg-yellow-500/5 border border-yellow-500/10">
                 <div className="flex items-start gap-3">
                   <span className="text-xl shrink-0">⚡</span>
-                  <p className="text-sm text-white/60">{t('specs.closingRemark')}</p>
+                  <p className="text-sm text-nav-link">{t('specs.closingRemark')}</p>
                 </div>
               </div>
             </div>

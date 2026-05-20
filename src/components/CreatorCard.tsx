@@ -43,43 +43,45 @@ const tagTranslations: Record<string, string> = {
 export default function CreatorCard({ creator, onConnect, lang }: { creator: Creator; onConnect: () => void; lang: string }) {
   const isZh = lang === 'zh'
   return (
-    <div className="group relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden hover:border-[#e94e9f]/40 hover:bg-white/[0.07] transition-all">
+    <div className="group relative rounded-2xl bg-card border-theme overflow-hidden transition-all" style={{ borderColor: 'var(--border-color)' }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(233,78,159,0.4)'; e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)' }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.backgroundColor = 'var(--bg-card)' }}>
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="relative">
-            <img src={creator.avatar} alt={creator.name} className="w-16 h-16 rounded-full bg-white/10" />
+            <img src={creator.avatar} alt={creator.name} className="w-16 h-16 rounded-full bg-card-hover" />
             {creator.online && (
-              <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 border-2 border-[#0f0f1a] rounded-full" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-400 rounded-full" style={{ border: '2px solid var(--bg-primary)' }} />
             )}
           </div>
           <div className="text-right">
-            <div className="text-xs text-white/40">{creator.online ? (isZh ? '在线' : 'Online') : (isZh ? '离线' : 'Offline')}</div>
+            <div className="text-xs text-muted">{creator.online ? (isZh ? '在线' : 'Online') : (isZh ? '离线' : 'Offline')}</div>
             <div className="text-lg font-bold text-[#e94e9f]">${creator.price}</div>
-            <div className="text-xs text-white/40">{isZh ? '/ 小时' : '/ hr'}</div>
+            <div className="text-xs text-muted">{isZh ? '/ 小时' : '/ hr'}</div>
           </div>
         </div>
 
         <div className="flex items-center gap-2 mb-1">
           <h3 className="font-semibold text-lg">{creator.name}</h3>
-          <span className="text-xs text-white/30">{creator.age}</span>
+          <span className="text-xs text-muted">{creator.age}</span>
           <div className="flex items-center gap-0.5 ml-auto">
             <span className="text-yellow-400 text-xs">★</span>
-            <span className="text-xs text-white/50">{creator.rating}</span>
+            <span className="text-xs text-secondary">{creator.rating}</span>
           </div>
         </div>
 
-        <p className="text-sm text-white/50 mb-3 line-clamp-2">{creator.bio}</p>
+        <p className="text-sm text-secondary mb-3 line-clamp-2">{creator.bio}</p>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {creator.tags.map((t) => (
-            <span key={t} className={`text-xs px-2 py-0.5 rounded-full ${tagColors[t] || 'bg-white/10 text-white/60'}`}>
+            <span key={t} className={`text-xs px-2 py-0.5 rounded-full ${tagColors[t] || 'bg-card-hover text-nav-link'}`}>
               {isZh ? t : (tagTranslations[t] || t)}
             </span>
           ))}
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/30">{creator.followers} {isZh ? '粉丝' : 'fans'}</span>
+          <span className="text-xs text-muted">{creator.followers} {isZh ? '粉丝' : 'fans'}</span>
           <button
             onClick={onConnect}
             className="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity"

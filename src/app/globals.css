@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-primary: #e94e9f;
   --color-primary-dark: #c43c82;
   --color-secondary: #6c5ce7;
@@ -13,13 +11,65 @@
 }
 
 :root {
-  --background: #0f0f1a;
-  --foreground: #f0e6ff;
+  --bg-primary: #f5f0ff;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(0,0,0,0.03);
+  --bg-card-hover: rgba(0,0,0,0.05);
+  --text-primary: #1a1a2e;
+  --text-secondary: rgba(0,0,0,0.5);
+  --text-muted: rgba(0,0,0,0.3);
+  --text-nav-link: rgba(0,0,0,0.6);
+  --text-on-primary: #ffffff;
+  --border-color: rgba(0,0,0,0.08);
+  --nav-bg: rgba(245,240,255,0.85);
+}
+
+:root.dark {
+  --bg-primary: #0f0f1a;
+  --bg-surface: #1a1a2e;
+  --bg-card: rgba(255,255,255,0.05);
+  --bg-card-hover: rgba(255,255,255,0.08);
+  --text-primary: #f0e6ff;
+  --text-secondary: rgba(255,255,255,0.5);
+  --text-muted: rgba(255,255,255,0.3);
+  --text-nav-link: rgba(255,255,255,0.6);
+  --text-on-primary: #ffffff;
+  --border-color: rgba(255,255,255,0.1);
+  --nav-bg: rgba(15,15,26,0.85);
+}
+
+/* Default to dark for existing browsers without JS */
+html {
+  --bg-primary: #0f0f1a;
+  --bg-surface: #1a1a2e;
+  --bg-card: rgba(255,255,255,0.05);
+  --bg-card-hover: rgba(255,255,255,0.08);
+  --text-primary: #f0e6ff;
+  --text-secondary: rgba(255,255,255,0.5);
+  --text-muted: rgba(255,255,255,0.3);
+  --text-nav-link: rgba(255,255,255,0.6);
+  --text-on-primary: #ffffff;
+  --border-color: rgba(255,255,255,0.1);
+  --nav-bg: rgba(15,15,26,0.85);
+}
+
+html.light {
+  --bg-primary: #f5f0ff;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(0,0,0,0.03);
+  --bg-card-hover: rgba(0,0,0,0.05);
+  --text-primary: #1a1a2e;
+  --text-secondary: rgba(0,0,0,0.5);
+  --text-muted: rgba(0,0,0,0.3);
+  --text-nav-link: rgba(0,0,0,0.6);
+  --text-on-primary: #ffffff;
+  --border-color: rgba(0,0,0,0.08);
+  --nav-bg: rgba(245,240,255,0.85);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -54,3 +104,13 @@ body {
 
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+.bg-card { background-color: var(--bg-card); }
+.bg-card-hover { background-color: var(--bg-card-hover); }
+.bg-surface { background-color: var(--bg-surface); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-nav-link { color: var(--text-nav-link); }
+.border-theme { border-color: var(--border-color); }
+
+input::placeholder, textarea::placeholder { color: var(--text-muted); }

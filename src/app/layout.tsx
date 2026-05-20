@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { LangProvider } from "@/i18n/useLanguage";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -124,11 +125,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#0f0f1a] text-[#f0e6ff]">
-        <LangProvider>
-          <Nav />
-          {children}
-        </LangProvider>
+      <body className="min-h-screen">
+        <ThemeProvider>
+          <LangProvider>
+            <Nav />
+            {children}
+          </LangProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

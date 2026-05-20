@@ -34,27 +34,29 @@ export default function ProfilePage() {
         {t('profile.title')}
       </h1>
 
-      <div className="p-6 mb-8 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-6">
+      <div className="p-6 mb-8 rounded-2xl bg-card border-theme flex items-center gap-6">
         <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#e94e9f] to-[#6c5ce7] flex items-center justify-center text-3xl font-bold">U</div>
         <div className="flex-1">
           <h2 className="text-2xl font-semibold">User_0x7a3f</h2>
-          <p className="text-sm text-white/40">0x7a3f...c9d2</p>
+          <p className="text-sm text-muted">0x7a3f...c9d2</p>
           <p className="text-sm mt-1">
             <span className="text-[#00cec9]">{t('profile.subscription')}:</span> Eve Pro
-            {' '}<span className="text-white/30">| {t('profile.expires')}: 2026-12-31</span>
+            {' '}<span className="text-muted">| {t('profile.expires')}: 2026-12-31</span>
           </p>
         </div>
-        <button className="px-4 py-2 rounded-xl bg-white/10 text-sm hover:bg-white/20 transition-colors">{t('profile.edit')}</button>
+        <button className="px-4 py-2 rounded-xl bg-card-hover text-sm transition-colors" style={{ color: 'var(--text-primary)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)'}>{t('profile.edit')}</button>
       </div>
 
-      <div className="flex gap-1 p-1 rounded-xl bg-white/5 mb-8">
+      <div className="flex gap-1 p-1 rounded-xl bg-card mb-8">
         {tabs.map((tName) => (
           <button
             key={tName}
             onClick={() => setTab(tName)}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
-              tab === tName ? 'bg-white/10 text-white' : 'text-white/40'
-            }`}
+               tab === tName ? 'bg-card-hover' : ''
+             }`} style={{ color: tab === tName ? 'var(--text-primary)' : 'var(--text-muted)' }}
           >
             {t(`profile.${tName}` as any)}
           </button>
@@ -63,28 +65,28 @@ export default function ProfilePage() {
 
       {tab === 'overview' && (
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+          <div className="p-6 rounded-2xl bg-card border-theme">
             <h3 className="font-semibold mb-2">{t('profile.subscription')}</h3>
             <p className="text-3xl font-bold text-[#00cec9]">Eve Pro</p>
-            <p className="text-sm text-white/40 mt-1">{t('profile.expires')}: 2026-12-31</p>
+            <p className="text-sm text-muted mt-1">{t('profile.expires')}: 2026-12-31</p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+          <div className="p-6 rounded-2xl bg-card border-theme">
             <h3 className="font-semibold mb-2">{t('profile.usage')}</h3>
             <p className="text-3xl font-bold text-[#6c5ce7]">12.5 {t('profile.hours')}</p>
-            <p className="text-sm text-white/40 mt-1">/ 30 {t('profile.hours')}</p>
+            <p className="text-sm text-muted mt-1">/ 30 {t('profile.hours')}</p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 col-span-full">
+          <div className="p-6 rounded-2xl bg-card border-theme col-span-full">
             <h3 className="font-semibold mb-4">{t('profile.devices')}</h3>
             {mockDevices.map((d) => (
-              <div key={d.id} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+              <div key={d.id} className="flex items-center justify-between py-2 last:border-0" style={{ borderBottom: '1px solid var(--border-color)' }}>
                 <div className="flex items-center gap-3">
                   <div className={`w-2 h-2 rounded-full ${d.status === 'online' ? 'bg-[#00cec9]' : 'bg-white/20'}`} />
                   <div>
                     <p className="font-medium text-sm">{d.name}</p>
-                    <p className="text-xs text-white/40">{d.id}</p>
+                    <p className="text-xs text-muted">{d.id}</p>
                   </div>
                 </div>
-                <span className="text-xs text-white/40">{t('profile.control')}</span>
+                <span className="text-xs text-muted">{t('profile.control')}</span>
               </div>
             ))}
             <button className="mt-4 text-sm text-[#6c5ce7] hover:underline">{t('profile.bindDevice')}</button>
@@ -95,18 +97,20 @@ export default function ProfilePage() {
       {tab === 'devices' && (
         <div className="space-y-3">
           {mockDevices.map((d) => (
-            <div key={d.id} className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+            <div key={d.id} className="p-5 rounded-2xl bg-card border-theme flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className={`w-3 h-3 rounded-full ${d.status === 'online' ? 'bg-[#00cec9]' : 'bg-white/20'}`} />
                 <div>
                   <p className="font-semibold">{d.name}</p>
-                  <p className="text-sm text-white/40">{d.id} · {t('profile.battery')}: {d.battery}% · {d.lastSync}</p>
+                  <p className="text-sm text-muted">{d.id} · {t('profile.battery')}: {d.battery}% · {d.lastSync}</p>
                 </div>
               </div>
               <button className="px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 text-sm hover:bg-red-500/20 transition-colors">{t('profile.unbind')}</button>
             </div>
           ))}
-          <button className="w-full py-3 rounded-2xl border border-dashed border-white/10 text-white/40 hover:border-[#6c5ce7]/50 hover:text-[#6c5ce7] transition-all">
+          <button className="w-full py-3 rounded-2xl border border-dashed text-muted transition-all" style={{ borderColor: 'var(--border-color)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(108,92,231,0.5)'; e.currentTarget.style.color = '#6c5ce7' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.color = 'var(--text-muted)' }}>
             {t('profile.bindDevice')}
           </button>
         </div>
@@ -115,11 +119,11 @@ export default function ProfilePage() {
       {tab === 'activity' && (
         <div className="space-y-2">
           {mockActivities.map((a, i) => (
-            <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4">
+            <div key={i} className="p-4 rounded-xl bg-card border-theme flex items-center gap-4">
               <div className="w-2 h-2 rounded-full bg-[#6c5ce7]" />
               <div className="flex-1">
                 <p className="text-sm"><span className="font-medium">{a.user}</span> {a.action}</p>
-                <p className="text-xs text-white/30 mt-0.5">{a.time}</p>
+                <p className="text-xs text-muted mt-0.5">{a.time}</p>
               </div>
             </div>
           ))}
@@ -133,10 +137,10 @@ export default function ProfilePage() {
             { label: t('profile.notification'), desc: t('profile.notificationDesc') },
             { label: t('profile.autoUpdate'), desc: t('profile.autoUpdateDesc') },
           ].map((s) => (
-            <div key={s.label} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+            <div key={s.label} className="p-4 rounded-xl bg-card border-theme flex items-center justify-between">
               <div>
                 <p className="font-medium text-sm">{s.label}</p>
-                <p className="text-xs text-white/40">{s.desc}</p>
+                <p className="text-xs text-muted">{s.desc}</p>
               </div>
               <div className="w-10 h-5 rounded-full bg-[#6c5ce7]/50 relative cursor-pointer">
                 <div className="w-4 h-4 rounded-full bg-white absolute top-0.5 right-0.5" />

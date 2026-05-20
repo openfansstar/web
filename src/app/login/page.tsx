@@ -42,18 +42,18 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] bg-clip-text text-transparent">
             {mode === 'login' ? t('login.title') : t('login.titleRegister')}
           </h1>
-          <p className="text-white/50 mt-2">
+          <p className="text-secondary mt-2">
             {mode === 'login' ? t('login.subtitle') : t('login.subtitleRegister')}
           </p>
         </div>
 
-        <div className="flex p-1 rounded-xl bg-white/5 mb-8">
+        <div className="flex p-1 rounded-xl bg-card mb-8">
           {(['login', 'register'] as const).map((m) => (
             <button
               key={m}
               onClick={() => setMode(m)}
               className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${
-                mode === m ? 'bg-[#e94e9f]/30 text-white' : 'text-white/40'
+                mode === m ? 'bg-[#e94e9f]/30 text-white' : 'text-muted'
               }`}
             >
               {m === 'login' ? t('login.login') : t('login.register')}
@@ -63,7 +63,9 @@ export default function LoginPage() {
 
         <button
           onClick={connectWallet}
-          className="w-full p-4 mb-6 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-3 group"
+          className="w-full p-4 mb-6 rounded-xl border-theme bg-card transition-all flex items-center justify-center gap-3 group" style={{ borderColor: 'var(--border-color)' }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-card)'}
         >
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-[#e94e9f] group-hover:text-[#6c5ce7] transition-colors"/>
@@ -75,9 +77,9 @@ export default function LoginPage() {
         </button>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs text-white/30">{t('login.orEmail')}</span>
-          <div className="flex-1 h-px bg-white/10" />
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-color)' }} />
+          <span className="text-xs text-muted">{t('login.orEmail')}</span>
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--border-color)' }} />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,7 +89,9 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t('login.email')}
             required
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#e94e9f]/50"
+            className="w-full px-4 py-3 rounded-xl bg-card border-theme focus:outline-none" style={{ color: 'var(--text-primary)' }}
+            onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(233,78,159,0.5)'}
+            onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
           />
           <input
             type="password"
@@ -96,14 +100,18 @@ export default function LoginPage() {
             placeholder={t('login.password')}
             required
             minLength={6}
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#e94e9f]/50"
+            className="w-full px-4 py-3 rounded-xl bg-card border-theme focus:outline-none" style={{ color: 'var(--text-primary)' }}
+            onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(233,78,159,0.5)'}
+            onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
           />
 
           {mode === 'register' && (
             <input
               type="text"
               placeholder={t('login.nickname')}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#e94e9f]/50"
+              className="w-full px-4 py-3 rounded-xl bg-card border-theme focus:outline-none" style={{ color: 'var(--text-primary)' }}
+              onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(233,78,159,0.5)'}
+              onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
             />
           )}
 
@@ -115,7 +123,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="text-center text-xs text-white/30 mt-6">
+        <p className="text-center text-xs text-muted mt-6">
           {t('login.terms')}{' '}
           <a href="#" className="text-[#6c5ce7] hover:underline">{t('login.termsLink')}</a>
           {' '}{t('login.and')}{' '}

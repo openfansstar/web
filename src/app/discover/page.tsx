@@ -37,7 +37,7 @@ export default function DiscoverPage() {
     <main className="pt-24 px-4 max-w-7xl mx-auto min-h-screen pb-24">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] bg-clip-text text-transparent">{t('discover.title')}</h1>
-        <div className="text-sm text-white/40">
+        <div className="text-sm text-muted">
           {filtered.length} {t('discover.online')}
         </div>
       </div>
@@ -48,9 +48,11 @@ export default function DiscoverPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={t('discover.search')}
-          className="w-full px-4 py-3 pl-10 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#e94e9f]/50"
+          className="w-full px-4 py-3 pl-10 rounded-xl bg-card border-theme focus:outline-none" style={{ color: 'var(--text-primary)' }}
+          onFocus={(e) => e.currentTarget.style.borderColor = 'rgba(233,78,159,0.5)'}
+          onBlur={(e) => e.currentTarget.style.borderColor = 'var(--border-color)'}
         />
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
         </svg>
       </div>
@@ -63,7 +65,7 @@ export default function DiscoverPage() {
             className={`shrink-0 px-4 py-1.5 rounded-full text-sm transition-all ${
               activeCat === cat
                 ? 'bg-gradient-to-r from-[#e94e9f] to-[#6c5ce7] text-white'
-                : 'bg-white/5 text-white/60 hover:bg-white/10'
+                : 'bg-card text-nav-link hover:bg-card-hover'
             }`}
           >
             {categoryTranslations[cat]?.[lang] ?? cat}
@@ -83,7 +85,7 @@ export default function DiscoverPage() {
       </div>
 
       {filtered.length === 0 && (
-        <div className="text-center py-20 text-white/30">
+        <div className="text-center py-20 text-muted">
           {t('discover.noResults')}
         </div>
       )}

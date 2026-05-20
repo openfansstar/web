@@ -39,13 +39,13 @@ export default function HeroAnimation() {
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f0f1a]" />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent, transparent 60%, var(--bg-primary))' }} />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
         <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-[#e94e9f] via-[#6c5ce7] to-[#00cec9] bg-clip-text text-transparent mb-4">
           Openfans
         </h1>
-        <p className="text-xl md:text-2xl text-white/70 max-w-xl">
+        <p className="text-xl md:text-2xl text-secondary max-w-xl">
           You are the star.
         </p>
         <div className="flex gap-6 mt-10">
@@ -57,7 +57,9 @@ export default function HeroAnimation() {
           </a>
           <a
             href="/console"
-            className="px-8 py-3 rounded-full border border-white/30 text-white/80 font-semibold text-lg hover:bg-white/10 transition-colors"
+            className="px-8 py-3 rounded-full border font-semibold text-lg transition-colors" style={{ borderColor: 'var(--border-color)', color: 'var(--text-secondary)', backgroundColor: 'transparent' }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-card-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
             {t('hero.console')}
           </a>
@@ -69,9 +71,9 @@ export default function HeroAnimation() {
           <button
             key={i}
             onClick={() => { setPrev(current); setCurrent(i) }}
-            className={`w-2 h-2 rounded-full transition-all ${
-              i === current ? 'bg-white w-6' : 'bg-white/40'
-            }`}
+            className={`rounded-full transition-all ${
+              i === current ? 'bg-white w-6 h-2' : 'w-2 h-2'
+            }`} style={{ backgroundColor: i === current ? 'white' : 'var(--text-muted)' }}
           />
         ))}
       </div>
