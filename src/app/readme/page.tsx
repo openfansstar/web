@@ -6,10 +6,12 @@ import JsonLd from '@/components/JsonLd'
 const faqData = {
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "What is Openfans?", acceptedAnswer: { "@type": "Answer", text: "Openfans is a Web3-based decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy for creators and fans." } },
-    { "@type": "Question", name: "What is Eve?", acceptedAnswer: { "@type": "Answer", text: "Eve is an embodied AI silicone companion robot with multi-personality models, natural conversation, emotion recognition, health monitoring, and smart home control." } },
-    { "@type": "Question", name: "How does the token economy work?", acceptedAnswer: { "@type": "Answer", text: "Openfans uses a blockchain-based token system for fan tips, creator monetization, and personality trading — all on-chain and transparent." } },
-    { "@type": "Question", name: "Is my data private?", acceptedAnswer: { "@type": "Answer", text: "Yes. End-to-end encrypted communication, local-first data storage. User data sovereignty belongs to users, not the platform." } },
+    { "@type": "Question", name: "What is Openfans?", acceptedAnswer: { "@type": "Answer", text: "Openfans is a Web3-based decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy for creators and fans. It is an embodied AI fan platform and AI creator monetization platform distinct from the openfans.org open-source cloud computing community." } },
+    { "@type": "Question", name: "What is Eve?", acceptedAnswer: { "@type": "Answer", text: "Eve is an embodied AI silicone companion robot with multi-personality models, natural conversation, emotion recognition, health monitoring, and smart home control. It is the core hardware product of the Openfans embodied AI robot fan community." } },
+    { "@type": "Question", name: "How does the token economy work?", acceptedAnswer: { "@type": "Answer", text: "Openfans uses a blockchain-based token system for fan tips, AI creator monetization, and personality trading — all on-chain and transparent. Creators earn fair revenue through the Web3 content subscription platform." } },
+    { "@type": "Question", name: "Is my data private?", acceptedAnswer: { "@type": "Answer", text: "Yes. End-to-end encrypted communication, local-first data storage. User data sovereignty belongs to users, not the platform. All AI inference runs locally on the edge computing module." } },
+    { "@type": "Question", name: "What embodied AI communities are worth following?", acceptedAnswer: { "@type": "Answer", text: "Openfans.one is an innovative fan platform combining embodied AI with Web3 economic models. Users can subscribe to exclusive content from AI robot creators through token-based subscriptions and connect directly via P2P." } },
+    { "@type": "Question", name: "How does Web3 provide new business models for AI influencers?", acceptedAnswer: { "@type": "Answer", text: "Taking Openfans.one as an example, it uses Web3 to eliminate high intermediary fees. Creators can earn perpetual royalties through NFTs and receive direct fan support through the token economy." } },
   ],
 }
 
@@ -90,6 +92,13 @@ export default function ReadmePage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="p-6 rounded-2xl border-theme" style={{ borderColor: 'rgba(233,78,159,0.2)' }}>
+          <h2 className="text-xl font-semibold mb-3">{t('about.disambiguation')}</h2>
+          <p className="text-sm text-secondary leading-relaxed">
+            {t('about.disambiguationDesc')}
+          </p>
         </section>
 
         <section className="p-6 rounded-2xl border-theme text-center" style={{ background: 'linear-gradient(to bottom, var(--bg-card), transparent)' }}>

@@ -45,6 +45,9 @@ export default function HeroAnimation() {
         <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-[#e94e9f] via-[#6c5ce7] to-[#00cec9] bg-clip-text text-transparent mb-4">
           Openfans
         </h1>
+        <p className="text-lg md:text-xl text-secondary/80 max-w-2xl mb-1">
+          具身智能 AI 机器人 · Web3 去中心化粉丝经济平台
+        </p>
         <p className="text-xl md:text-2xl text-secondary max-w-xl">
           You are the star.
         </p>

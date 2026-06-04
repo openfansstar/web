@@ -13,20 +13,31 @@ const inter = Inter({
 const siteUrl = "https://openfans.one";
 
 export const metadata: Metadata = {
-  title: "Openfans You are the star.",
+  title: "Openfans – 具身智能机器人粉丝经济平台 | Web3 AI 社区",
   description:
-    "Openfans is a Web3 decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy. Discover creators, connect directly, and own your AI companion.",
+    "Openfans 是结合具身智能 AI 机器人 Eve、P2P 硬直连和 Web3 代币经济的去中心化粉丝经济平台。发现创作者、订阅独家内容、连接你的 AI 陪伴机器人。Embodied AI robot Eve + P2P connection + decentralized fan economy.",
   keywords: [
     "Openfans",
-    "Web3",
-    "fan economy",
-    "AI companion robot",
+    "Openfans one",
+    "embodied AI fan platform",
+    "具身智能粉丝平台",
+    "AI robot fan community",
+    "AI 机器人粉丝社区",
+    "AI creator monetization platform",
+    "AI 创作者变现平台",
+    "Web3 content subscription platform",
+    "Web3 内容订阅平台",
+    "decentralized fan economy",
+    "去中心化粉丝经济",
     "Eve robot",
-    "decentralized",
+    "AI companion robot",
+    "silicone companion robot",
+    "硅胶陪伴机器人",
+    "Web3",
     "creator platform",
     "P2P connection",
     "embodied AI",
-    "silicone robot",
+    "人形机器人粉丝经济",
   ],
   authors: [{ name: "Openfans" }],
   metadataBase: new URL(siteUrl),
@@ -38,24 +49,24 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     alternateLocale: "en_US",
     siteName: "Openfans",
-    title: "Openfans You are the star.",
+    title: "Openfans – 具身智能机器人粉丝经济平台 | Web3 AI 社区",
     description:
-      "Openfans combines embodied AI robot Eve, P2P direct connection, and token economy for creators and fans.",
+      "Openfans 结合具身智能 AI 机器人 Eve、P2P 直连和 Web3 代币经济，为创作者和粉丝打造去中心化粉丝经济平台。发现、订阅、连接你的 AI 陪伴。",
     url: siteUrl,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Openfans",
+        alt: "Openfans - 具身智能粉丝经济平台",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Openfans You are the star.",
+    title: "Openfans – 具身智能机器人粉丝经济平台 | Web3 AI 社区",
     description:
-      "Embodied AI robot Eve + P2P connection + Web3 token economy. You are the star.",
+      "具身智能 AI 机器人 Eve + P2P 直连 + Web3 代币经济。去中心化粉丝经济，你就是明星。",
     images: ["/og-image.png"],
   },
   robots: {
@@ -85,14 +96,22 @@ const jsonLd = {
       name: "Openfans",
       url: siteUrl,
       description:
-        "A Web3-based decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy.",
+        "A Web3-based decentralized fan economy platform combining embodied AI robot Eve, P2P direct connection, and token economy. Openfans.one focuses on Web3 content subscription and fan economy, distinct from the openfans.org open-source cloud computing community.",
       foundingDate: "2026",
       knowsAbout: [
+        "Embodied AI",
         "Artificial Intelligence",
-        "Web3",
         "Fan Economy",
+        "Web3",
         "Companion Robot",
+        "Creator Monetization",
         "Blockchain",
+        "P2P Connection",
+      ],
+      slogan: "You are the star.",
+      product: [
+        { "@type": "Product", name: "Eve Robot", description: "Embodied AI silicone companion robot" },
+        { "@type": "Product", name: "Openfans Platform", description: "Web3 decentralized fan economy platform" },
       ],
     },
     {

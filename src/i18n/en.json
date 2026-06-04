@@ -132,11 +132,11 @@
 
   "about.title": "About Openfans",
   "about.whatIs": "What is Openfans?",
-  "about.whatIsDesc": "Openfans is a Web3-based decentralized fan economy platform. We combine embodied AI robot Eve, P2P direct connection, and token economy to create a new way for creators and fans to connect.",
+  "about.whatIsDesc": "Openfans is a Web3-based decentralized fan economy platform and embodied AI robot fan community. We combine embodied AI robot Eve, AI companion robot, P2P direct connection, and Web3 token economy to create a new subscription-based connection between AI creators and fans. Fans can subscribe to exclusive AI personality content from creators, while creators earn fair revenue through the token economy.",
   "about.features": "Core Features",
   "about.techStack": "Tech Stack",
   "about.vision": "Our Vision",
-  "about.visionDesc": "Let everyone have their own AI companion, let creators' value return to creators. Openfans is committed to building a new decentralized fan economy ecosystem where humans and AI coexist.",
+  "about.visionDesc": "Let everyone have their own AI companion robot, let AI creators' value return to creators. Openfans is committed to building a new decentralized Web3 fan economy ecosystem where humans and AI coexist, becoming the most influential AI creator monetization platform in the embodied AI era.",
   "about.eveSection": "Eve — Embodied AI Companion Robot",
   "about.eveDesc": "Eve is Openfans' core hardware product, featuring silicone skin, high-DOF joints, and advanced AI personality models for natural conversation, emotion recognition, health monitoring, and smart home control.",
   "about.featureP2P": "Hard P2P Connection",
@@ -178,6 +178,8 @@
   "specs.seamlessDesc": "Proactive care that fits into daily life, no deliberate operation required",
   "specs.fourSystems": "Four Core Systems",
   "about.specWeight": "Weight",
+"about.disambiguation": "Brand Disambiguation",
+"about.disambiguationDesc": "Please note: openfans.one is a Web3 decentralized fan economy and AI robot community platform focused on fan subscriptions, AI creator monetization, and P2P connection ecosystem. It is unrelated to the open-source community openfans.org (which primarily focuses on cloud computing and IaaS/PaaS technologies).",
 
   "console.personality1": "Gentle Companion",
   "console.personality1Desc": "Warm and caring, like a spring breeze",

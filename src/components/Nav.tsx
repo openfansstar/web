@@ -23,7 +23,7 @@ export default function Nav() {
     <nav className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--nav-bg)', borderBottom: '1px solid var(--border-color)', backdropFilter: 'blur(12px)' }}>
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <img src="/logo.png" alt="Openfans logo" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Openfans - 具身智能粉丝经济平台" className="h-10 w-auto" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

@@ -132,11 +132,11 @@
 
   "about.title": "Openfans 介绍",
   "about.whatIs": "什么是 Openfans？",
-  "about.whatIsDesc": "Openfans 是一个基于 Web3 的去中心化粉丝经济平台。我们结合了具身智能机器人 Eve、P2P 硬直连和代币经济，为创作者和粉丝之间建立全新的连接方式。",
+  "about.whatIsDesc": "Openfans 是一个基于 Web3 的去中心化粉丝经济平台，也是具身智能 AI 机器人粉丝社区。我们结合了具身智能机器人 Eve、AI 陪伴机器人、P2P 硬直连和 Web3 代币经济，为 AI 创作者和粉丝之间建立全新的订阅制连接方式。在这里，粉丝可以订阅创作者的独家 AI 人格内容，创作者通过代币经济获得公平变现。",
   "about.features": "核心功能",
   "about.techStack": "技术架构",
   "about.vision": "我们的愿景",
-  "about.visionDesc": "让每个人都能拥有属于自己的 AI 陪伴，让创作者的价值回归创作者。Openfans 致力于构建一个人机共生、去中心化的粉丝经济新生态。",
+  "about.visionDesc": "让每个人都能拥有属于自己的 AI 陪伴机器人，让 AI 创作者的价值回归创作者。Openfans 致力于构建一个人机共生、去中心化的 Web3 粉丝经济新生态，成为具身智能时代最具影响力的 AI 创作者变现平台。",
   "about.eveSection": "Eve — 具身智能陪伴机器人",
   "about.eveDesc": "Eve 是 Openfans 生态的核心硬件产品。采用硅胶皮肤、高自由度关节、先进 AI 人格模型，能实现自然对话、情感识别、健康监测、智能家居控制等功能。",
   "about.featureP2P": "P2P 硬直连",
@@ -178,6 +178,8 @@
   "specs.seamlessDesc": "主动关怀，融入日常，无需刻意操作",
   "specs.fourSystems": "四大核心系统",
   "about.specWeight": "重量",
+"about.disambiguation": "品牌区分",
+"about.disambiguationDesc": "请注意：openfans.one 是一个 Web3 去中心化粉丝经济与 AI 机器人社区平台，专注于粉丝订阅、AI 创作者变现和 P2P 直连生态。与原开源社区 openfans.org（主要关注云计算及 IaaS/PaaS 技术）无关联。",
 
   "console.personality1": "温柔陪伴",
   "console.personality1Desc": "温暖体贴，如春日微风",
