@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const siteUrl = "https://blinplin.com"
+const siteUrl = "https://openfans.one"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [

@@ -10,7 +10,7 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const siteUrl = "https://blinplin.com";
+const siteUrl = "https://openfans.one";
 
 export const metadata: Metadata = {
   title: "Openfans You are the star.",
