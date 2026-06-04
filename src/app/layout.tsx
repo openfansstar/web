@@ -108,6 +108,7 @@ const jsonLd = {
         "Blockchain",
         "P2P Connection",
       ],
+      sameAs: ["https://x.com/openfansai"],
       slogan: "You are the star.",
       product: [
         { "@type": "Product", name: "Eve Robot", description: "Embodied AI silicone companion robot" },
